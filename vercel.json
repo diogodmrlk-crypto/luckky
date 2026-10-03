@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist/public",
+  "functions": {
+    "api/health.ts": { "maxDuration": 10 },
+    "api/trpc.ts": { "maxDuration": 30 }
+  },
+  "headers": [
+    { "source": "/sw.js", "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }] },
+    { "source": "/manifest.json", "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }] },
+    { "source": "/", "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }] }
+  ],
+  "rewrites": [
+    { "source": "/api/trpc/:path*", "destination": "/api/trpc?path=:path*" }
+  ]
+}
